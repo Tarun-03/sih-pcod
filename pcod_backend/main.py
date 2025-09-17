@@ -117,11 +117,11 @@ def predict_flare_up(data: UserInput):
     # Get the probability of a flare-up (class 1)
     flare_up_probability = prediction_proba[0][1]
 
-    # Return the final prediction in a clear JSON format
+    prediction_label = int(flare_up_probability > 0.5)
+
     return {
-        "prediction_probability": float(f"{flare_up_probability:.4f}"), # Format to 4 decimal places
-        "prediction_label": int(flare_up_probability > 0.5), # Predict 1 if prob > 50%
-        "message": "Prediction successful"
+        "riskPercentage": int(flare_up_probability * 100),
+        "willExperienceFlare": bool(prediction_label)
     }
 
 
