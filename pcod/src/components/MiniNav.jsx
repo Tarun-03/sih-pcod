@@ -4,23 +4,20 @@ import myLogo from '../assets/Logo.png';
 
 const Navbar = () => {
   return (
-    <nav className="fixed top-0 left-0 z-50 w-full flex items-center justify-between 
-                    py-4 px-8 bg-white/60 backdrop-blur-md border-b border-white/30 
-                    shadow-sm">
-      
-      {/* Logo */}
+    <nav className="flex items-center justify-between py-4 px-4 bg-black-700 shadow-md">
+      {/* Replaced text with an image */}
       <div className="flex-shrink-0">
         <Link to="/">
           <img src={myLogo} alt="PCOD App Logo" className="h-12 w-auto" />
         </Link>
       </div>
       
-      {/* Navigation Links */}
+      {/* Navigation Links (Text) */}
       <ul className="flex items-center space-x-6">
         <li>
           <Link 
             to="/" 
-            className="text-gray-800 font-semibold text-lg hover:text-violet-600 transition-colors duration-300"
+            className="text-black font-bold text-lg hover:text-gray-200 transition-colors duration-300"
           >
             Home
           </Link>
@@ -28,7 +25,7 @@ const Navbar = () => {
         <li>
           <Link 
             to="/about" 
-            className="text-gray-800 font-semibold text-lg hover:text-violet-600 transition-colors duration-300"
+            className="text-black font-bold text-lg hover:text-gray-200 transition-colors duration-300"
           >
             About
           </Link>
