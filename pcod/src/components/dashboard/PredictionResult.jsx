@@ -8,22 +8,37 @@ const PredictionResult = () => {
 
   // This hook simulates fetching data from your backend
   useEffect(() => {
-    const fetchPrediction = () => {
-      setTimeout(() => {
-        // This is where you would call your actual backend API
-        // For now, we use mock data
-        const mockBackendResponse = {
-          riskPercentage: 65,
-          willExperienceFlare: true,
-        };
-        setPredictionResult(mockBackendResponse);
-        setIsLoading(false);
-      }, 1500); // Simulate a 1.5-second network delay
+    const fetchPrediction = async () => {
+      if (!profile) return; // Don't run if profile data isn't loaded yet
+
+      setIsLoading(true);
+      try {
+        // Use the fetch logic from your sample file
+        const response = await fetch('http://127.0.0.1:8000/predict', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          // Send the profile data from your context as the body
+          body: JSON.stringify(profile), 
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const result = await response.json();
+        setPredictionResult(result); // Set the state with the real backend response
+
+      } catch (error) {
+        console.error("Error fetching prediction:", error);
+        // Optionally set an error state to display a message to the user
+      } finally {
+        setIsLoading(false); // Stop the loading indicator
+      }
     };
 
-    if (profile) {
-      fetchPrediction();
-    }
+    fetchPrediction();
   }, [profile]);
 
   return (
